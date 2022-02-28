@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Tab 3 </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <cdk-virtual-scroll-viewport
+    itemSize="44"
+    minBufferPx="880"
+    maxBufferPx="880"
+  >
+    <ion-list>
+      <ion-item [id]="item.id" *cdkVirtualFor="let item of items$ | async">
+        <ion-avatar slot="start">
+          <ion-img [src]="item.thumbnailUrl"></ion-img>
+        </ion-avatar>
+        <ion-label class="ion-text-wrap"> {{ item.title }} </ion-label>
+      </ion-item>
+    </ion-list>
+  </cdk-virtual-scroll-viewport>
+</ion-content>

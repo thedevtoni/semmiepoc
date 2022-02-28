@@ -1,0 +1,9 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "semmie-poc",
+	"webDir": "www",
+	"bundledWebRuntime": false,
+	"server": {
+		"url": "http://192.168.10.212:4200"
+	}
+}
