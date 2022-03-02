@@ -1,0 +1,21 @@
+<ion-content>
+  <ion-list>
+    <ion-card
+      [routerLink]="[account.id]"
+      *ngFor="let account of accounts$ | async"
+    >
+      <img
+        height="180"
+        width="100%"
+        style="object-fit: cover"
+        [src]="account.image ?? defaultImage"
+      />
+      <ion-card-header>
+        <ion-card-subtitle>{{
+          account.value ?? 0 | currency
+        }}</ion-card-subtitle>
+        <ion-card-title>{{ account.title ?? "Account" }}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </ion-list>
+</ion-content>

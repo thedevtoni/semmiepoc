@@ -25,6 +25,10 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .splashscreen {
   position: absolute;
   left: 0;
@@ -32,4 +36,9 @@
   top: 0;
   bottom: 0;
   background-color: black;
+}
+
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
 }

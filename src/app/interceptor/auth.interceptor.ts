@@ -7,7 +7,6 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
-import { UserService } from '../services/user.service';
 import { UserQuery, UserStore } from '../store/user';
 
 const REFRESH_TOKEN_THRESHOLD = 600;
@@ -25,7 +24,7 @@ export class AuthInterceptor implements HttpInterceptor {
       switchMap((token) => {
         const tokenIsExpired =
           !!token && this.isTokenExpired(token.created_at, token.expires_in);
-
+        console.log(tokenIsExpired);
         if (tokenIsExpired) {
           return this.refreshToken(token.refresh_token);
         }

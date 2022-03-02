@@ -15,8 +15,8 @@ import { UserQuery, UserStore } from 'src/app/store/user';
 })
 export class LoginPage {
   form = new FormGroup({
-    username: new FormControl('anthony@semmie.nl'),
-    password: new FormControl('Ada161198..+'),
+    username: new FormControl('stephanie24068@test.nl'),
+    password: new FormControl('Asdqwe123'),
   });
 
   loading$ = this.userQuery.selectLoading();
@@ -56,7 +56,7 @@ export class LoginPage {
           this.userStore.update({ user });
           loader.dismiss();
           this.userStore.setLoading(false);
-          this.router.navigate(['/tabs/tab1']);
+          this.router.navigate(['/tabs']);
         },
         () => {
           loader.dismiss();

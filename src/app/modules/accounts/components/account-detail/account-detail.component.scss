@@ -1,0 +1,21 @@
+ion-content {
+  --ion-background-color: #222428;
+}
+
+.container {
+  padding: 1rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.value-header {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  .subtitle {
+    font-size: 11px;
+  }
+  .quantity {
+    font-weight: 600;
+  }
+}

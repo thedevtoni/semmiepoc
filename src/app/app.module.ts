@@ -1,11 +1,12 @@
 import {
   HttpClient,
   HttpClientModule,
-  HTTP_INTERCEPTORS,
+  HTTP_INTERCEPTORS
 } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { EMPTY } from 'rxjs';
@@ -58,6 +59,7 @@ function getUser(http: HttpClient, userStore: UserStore) {
       deps: [HttpClient, UserStore],
       useFactory: getUser,
     },
+    HTTP,
   ],
   bootstrap: [AppComponent],
 })
