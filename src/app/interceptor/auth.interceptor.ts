@@ -24,7 +24,6 @@ export class AuthInterceptor implements HttpInterceptor {
       switchMap((token) => {
         const tokenIsExpired =
           !!token && this.isTokenExpired(token.created_at, token.expires_in);
-        console.log(tokenIsExpired);
         if (tokenIsExpired) {
           return this.refreshToken(token.refresh_token);
         }

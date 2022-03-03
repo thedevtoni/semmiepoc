@@ -1,31 +1,68 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Chart from 'chart.js/auto';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { AccountService } from 'src/app/services';
+import { AccountQuery, AccountStore } from 'src/app/store/account';
 
 @Component({
   selector: 'app-account-detail',
   templateUrl: './account-detail.component.html',
   styleUrls: ['./account-detail.component.scss'],
 })
-export class AccountDetailComponent implements AfterViewInit {
+export class AccountDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('lineChart')
   lineChart: ElementRef<HTMLCanvasElement>;
 
+  account$ = this.accountQuery.selectEntity(this.accountId);
+
   constructor(
     private accountService: AccountService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private accountQuery: AccountQuery,
+    private accountStore: AccountStore
   ) {}
+
+  get accountId() {
+    const { id } = this.route.snapshot.params;
+    return id;
+  }
+
+  ngOnInit(): void {
+    this.accountService
+      .getAccount(this.accountId)
+      .pipe(
+        take(1),
+        map(({ account }) => account)
+      )
+      .subscribe((account) =>
+        this.accountStore.upsert(account.id, { ...account })
+      );
+
+    this.accountService
+      .getAccountGoal(this.accountId)
+      .pipe(take(1))
+      .subscribe((goal) =>
+        this.accountStore.upsert(this.accountId, (entity) => ({
+          ...entity,
+          goal,
+        }))
+      );
+  }
 
   ngAfterViewInit(): void {
     this.createBarChart();
   }
 
   createBarChart() {
-    const { id } = this.route.snapshot.params;
     this.accountService
-      .getAccountPerformance(id)
+      .getAccountPerformance(this.accountId)
       .pipe(take(1))
       .subscribe(({ performances }) => {
         new Chart(this.lineChart.nativeElement, {

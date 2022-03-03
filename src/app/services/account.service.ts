@@ -23,6 +23,14 @@ export class AccountService {
     });
   }
 
+  public getAccount(accountId: string) {
+    return this.http.get<any>(`${this.baseUrl}/accounts/${accountId}`);
+  }
+
+  public getAccountGoal(accountId: string) {
+    return this.http.get<any>(`${this.baseUrl}/accounts/${accountId}/goal`);
+  }
+
   public getAccountPerformance(accountId: string) {
     return this.http.get<any>(
       `${this.baseUrl}/accounts/${accountId}/performances`

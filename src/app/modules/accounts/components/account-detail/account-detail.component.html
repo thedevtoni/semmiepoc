@@ -1,147 +1,161 @@
-<ion-header>
-  <ion-toolbar color="dark">
-    <ion-title>About</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button text=""></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<ng-container *ngIf="{ account: account$ | async } as ctx">
+  <ion-header>
+    <ion-toolbar color="dark">
+      <ion-title>{{ ctx.account?.title }}</ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button text=""></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content [forceOverscroll]="false">
-  <div class="value-header ion-padding">
-    <span class="subtitle">Huidige waarde</span>
-    <h4 class="quantity">{{ 5900 | currency }}</h4>
-  </div>
-  <div>
-    <canvas #lineChart></canvas>
-  </div>
-
-  <div
-    class="container bg-semmie-light ion-margin-top border-b border-gray-200"
-  >
-    <ion-row>
-      <ion-col size="6">
-        <ion-button
-          class="rounded-full overflow-hidden"
-          expand="block"
-          color="success"
-          >Storten</ion-button
-        >
-      </ion-col>
-      <ion-col size="6">
-        <ion-button
-          class="rounded-full overflow-hidden"
-          expand="block"
-          color="light"
-          >Openem</ion-button
-        >
-      </ion-col>
-    </ion-row>
-  </div>
-
-  <div class="px-4 py-6 bg-semmie-light">
-    <div class="flex flex-col">
-      <h1 class="text-gray-400 text-sm mb-2">Doelverwachting</h1>
-      <div
-        class="bg-white shadow-semmie space-y-6 py-12 flex flex-col items-center justify-center rounded-2xl p-6"
-      >
-        <img class="h-20" src="assets/img/plan.png" height="78" />
-        <p class="text-sm text-center text-gray-500">
-          Vul de gevraagde gegevens in om de doelverwachting te tonen.
-        </p>
-        <ion-button class="rounded-full overflow-hidden" color="primary">
-          <span class="px-6 font-semibold">Nu activeren</span>
-        </ion-button>
-      </div>
+  <ion-content [forceOverscroll]="false">
+    <div class="value-header ion-padding">
+      <span class="subtitle">Huidige waarde</span>
+      <h4 class="quantity">
+        {{ ctx.account?.current_available_for_withdrawal_value | currency }}
+      </h4>
     </div>
-  </div>
+    <div>
+      <canvas #lineChart></canvas>
+    </div>
 
-  <div class="px-4 py-6 bg-semmie-light">
-    <div class="flex flex-col">
-      <h1 class="text-gray-400 text-sm mb-2">Huidige waarde</h1>
-      <div class="bg-white shadow-semmie rounded-2xl">
-        <div class="px-6 py-4 flex flex-col space-y-2">
-          <div
-            class="flex justify-between text-base font-semibold items-center tracking-wide"
+    <div
+      class="container bg-semmie-light ion-margin-top border-b border-gray-200"
+    >
+      <ion-row>
+        <ion-col size="6">
+          <ion-button
+            class="rounded-full overflow-hidden"
+            expand="block"
+            color="success"
+            >Storten</ion-button
           >
-            <span>Saldo</span>
-            <span>€ 257.334,99</span>
-          </div>
-          <div
-            class="flex justify-between text-gray-400 text-sm font-semibold items-center tracking-wide"
+        </ion-col>
+        <ion-col size="6">
+          <ion-button
+            class="rounded-full overflow-hidden"
+            expand="block"
+            color="light"
+            >Openem</ion-button
           >
-            <span>Belegging</span>
-            <span>€ 256.122,05</span>
-          </div>
-          <div
-            class="flex justify-between text-gray-400 text-sm font-semibold items-center tracking-wide"
-          >
-            <span>Cash</span>
-            <span>€ 1.212,94</span>
-          </div>
-          <div
-            class="flex justify-between text-gray-400 text-sm font-semibold items-center tracking-wide"
-          >
-            <span>Booster</span>
-            <span>€ 0,00</span>
-          </div>
-        </div>
+        </ion-col>
+      </ion-row>
+    </div>
 
-        <div class="px-6 py-4 flex flex-col space-y-2 border-t border-gray-200">
-          <div
-            class="flex justify-between text-base font-semibold items-center tracking-wide"
-          >
-            <span>Inleg</span>
-            <span>€ 253.500,01</span>
-          </div>
-        </div>
-
-        <div class="px-6 py-4 flex flex-col space-y-2 border-t border-gray-200">
-          <div
-            class="flex justify-between text-base font-semibold items-center tracking-wide"
-          >
-            <span>Resultaat</span>
-            <span>€ 3.834,98</span>
-          </div>
+    <div class="px-4 py-6 bg-semmie-light">
+      <div class="flex flex-col">
+        <h1 class="text-gray-400 text-sm mb-2">Doelverwachting</h1>
+        <div
+          class="bg-white shadow-semmie space-y-6 py-12 flex flex-col items-center justify-center rounded-2xl p-6"
+        >
+          <img class="h-20" src="assets/img/plan.png" height="78" />
+          <p class="text-sm text-center text-gray-500">
+            Vul de gevraagde gegevens in om de doelverwachting te tonen.
+          </p>
+          <ion-button class="rounded-full overflow-hidden" color="primary">
+            <span class="px-6 font-semibold">Nu activeren</span>
+          </ion-button>
         </div>
       </div>
     </div>
 
-    <div class="flex flex-col mt-8 -mx-4">
-      <h1 class="text-gray-400 text-sm mb-2 px-4">Fondsen</h1>
-      <div class="overflow-x-auto no-scrollbar pb-6 px-4">
-        <div class="flex snap-x space-x-3 flex-nowrap mr-4">
+    <div class="px-4 py-6 bg-semmie-light">
+      <div class="flex flex-col">
+        <h1 class="text-gray-400 text-sm mb-2">Huidige waarde</h1>
+        <div class="bg-white shadow-semmie rounded-2xl">
+          <div class="px-6 py-4 flex flex-col space-y-2">
+            <div
+              class="flex justify-between text-base font-semibold items-center tracking-wide"
+            >
+              <span>Saldo</span>
+              <span>{{
+                ctx.account?.current_available_for_withdrawal_value | currency
+              }}</span>
+            </div>
+            <div
+              class="flex justify-between text-gray-400 text-sm font-semibold items-center tracking-wide"
+            >
+              <span>Belegging</span>
+              <span>{{
+                ctx.account?.current_position_security_value | currency
+              }}</span>
+            </div>
+            <div
+              class="flex justify-between text-gray-400 text-sm font-semibold items-center tracking-wide"
+            >
+              <span>Cash</span>
+              <span>{{ ctx.account?.current_cash_value | currency }}</span>
+            </div>
+            <div
+              class="flex justify-between text-gray-400 text-sm font-semibold items-center tracking-wide"
+            >
+              <span>Booster</span>
+              <span>{{ ctx.account?.current_boost_value | currency }}</span>
+            </div>
+          </div>
+
           <div
-            *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
-            class="bg-white snap-center shadow-semmie rounded-2xl flex-shrink-0 w-72"
+            class="px-6 py-4 flex flex-col space-y-2 border-t border-gray-200"
           >
-            <div class="px-6 pt-4 pb-6 flex flex-col space-y-2 items-start">
-              <div
-                class="bg-black px-3 py-1 text-xs rounded-full font-semibold text-white"
-              >
-                USRIH
-              </div>
-              <div class="mt-4">
-                <p class="text-base font-semibold">
-                  Amundi Index MSCI USA SRI UCITS ETF
-                </p>
-              </div>
-              <div
-                class="flex w-full justify-between text-sm text-gray-400 items-center tracking-wide"
-              >
-                <span>Waarde</span>
-                <span>€ 0,00</span>
-              </div>
-              <div
-                class="flex w-full justify-between text-sm text-gray-400 items-center tracking-wide"
-              >
-                <span>Weging</span>
-                <span>0,0%</span>
+            <div
+              class="flex justify-between text-base font-semibold items-center tracking-wide"
+            >
+              <span>Inleg</span>
+              <span>{{ ctx.account?.total_deposit | currency }}</span>
+            </div>
+          </div>
+
+          <div
+            class="px-6 py-4 flex flex-col space-y-2 border-t border-gray-200"
+          >
+            <div
+              class="flex justify-between text-base font-semibold items-center tracking-wide"
+            >
+              <span>Resultaat</span>
+              <span>{{
+                ctx.account?.current_performance_amount | currency
+              }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col mt-8 -mx-4">
+        <h1 class="text-gray-400 text-sm mb-2 px-4">Fondsen</h1>
+        <div class="overflow-x-auto no-scrollbar pb-6 px-4">
+          <div class="flex snap-x space-x-3 flex-nowrap mr-4">
+            <div
+              *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+              class="bg-white snap-center shadow-semmie rounded-2xl flex-shrink-0 w-72"
+            >
+              <div class="px-6 pt-4 pb-6 flex flex-col space-y-2 items-start">
+                <div
+                  class="bg-black px-3 py-1 text-xs rounded-full font-semibold text-white"
+                >
+                  USRIH
+                </div>
+                <div class="mt-4">
+                  <p class="text-base font-semibold">
+                    Amundi Index MSCI USA SRI UCITS ETF
+                  </p>
+                </div>
+                <div
+                  class="flex w-full justify-between text-sm text-gray-400 items-center tracking-wide"
+                >
+                  <span>Waarde</span>
+                  <span>€ 0,00</span>
+                </div>
+                <div
+                  class="flex w-full justify-between text-sm text-gray-400 items-center tracking-wide"
+                >
+                  <span>Weging</span>
+                  <span>0,0%</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</ion-content>
+  </ion-content>
+</ng-container>

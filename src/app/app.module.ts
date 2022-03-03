@@ -1,12 +1,16 @@
 import {
   HttpClient,
   HttpClientModule,
-  HTTP_INTERCEPTORS
+  HTTP_INTERCEPTORS,
 } from '@angular/common/http';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import {
+  APP_INITIALIZER,
+  DEFAULT_CURRENCY_CODE,
+  LOCALE_ID,
+  NgModule,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { EMPTY } from 'rxjs';
@@ -19,6 +23,10 @@ import { AuthInterceptor } from './interceptor';
 import { User } from './models';
 import { UserStore } from './store/user';
 import { API_ROOT_URL } from './tokens';
+import localeNL from '@angular/common/locales/nl';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeNL, 'nl');
 
 // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 function getUser(http: HttpClient, userStore: UserStore) {
@@ -59,7 +67,11 @@ function getUser(http: HttpClient, userStore: UserStore) {
       deps: [HttpClient, UserStore],
       useFactory: getUser,
     },
-    HTTP,
+    {
+      provide: LOCALE_ID,
+      useValue: 'nl',
+    },
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
   ],
   bootstrap: [AppComponent],
 })
