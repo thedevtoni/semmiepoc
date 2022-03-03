@@ -21,9 +21,7 @@ export class Tab4Page implements AfterViewInit {
 
   constructor() {}
 
-  ngAfterViewInit(): void {
-    this.createBarChart();
-  }
+  ngAfterViewInit(): void {}
 
   createBarChart() {
     this.bars = new Chart(this.barChart.nativeElement, {
