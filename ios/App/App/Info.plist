@@ -5,7 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>semmie-poc</string>
+	<string>semmie-poc</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Privacy - Face ID Usage Description</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

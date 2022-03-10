@@ -1,8 +1,10 @@
+import { registerLocaleData } from '@angular/common';
 import {
   HttpClient,
   HttpClientModule,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
+import localeNL from '@angular/common/locales/nl';
 import {
   APP_INITIALIZER,
   DEFAULT_CURRENCY_CODE,
@@ -12,6 +14,7 @@ import {
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { EMPTY } from 'rxjs';
 import { catchError, take, tap } from 'rxjs/operators';
@@ -23,8 +26,6 @@ import { AuthInterceptor } from './interceptor';
 import { User } from './models';
 import { UserStore } from './store/user';
 import { API_ROOT_URL } from './tokens';
-import localeNL from '@angular/common/locales/nl';
-import { registerLocaleData } from '@angular/common';
 
 registerLocaleData(localeNL, 'nl');
 
@@ -71,6 +72,7 @@ function getUser(http: HttpClient, userStore: UserStore) {
       provide: LOCALE_ID,
       useValue: 'nl',
     },
+    FingerprintAIO,
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
   ],
   bootstrap: [AppComponent],

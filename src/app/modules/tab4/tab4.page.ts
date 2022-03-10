@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import Chart from 'chart.js/auto';
 
+
 @Component({
   selector: 'app-tab4',
   templateUrl: 'tab4.page.html',
